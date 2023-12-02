@@ -1,0 +1,41 @@
+@startuml
+class Frogdrick{
++moverarriba()
++moverizquierda()
++moverderecha()
++moverabajo()
+}
+class Jugador
+class Tronco
+class Carro
+class Camion 
+class Puntos{
++aumentar()
+}
+class Tiempo{
++disminuir()
+}
+class Vida
+class Escenario
+class Obstaculo{
++scrollizquierda()
++scrollderecha()
+}
+class Plataforma{
++scrollizquierda()
++scrollderecha()
+}
+class Tortuga
+
+Frogdrick *-- Vida
+Jugador o-- Frogdrick
+Jugador *-- Tiempo
+Jugador *-- Puntos
+Escenario *-- Plataforma
+Escenario *-- Obstaculo
+Obstaculo --|> Carro
+Obstaculo --|> Camion 
+Plataforma --|> Tortuga
+Plataforma --|> Tronco
+Frogdrick o-- Escenario
+@enduml
