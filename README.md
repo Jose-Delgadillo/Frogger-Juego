@@ -20,10 +20,10 @@ Es el personaje principal del juego. Una rana que puede moverse en un plano 2D y
 Los carros son el obstaculo principal para la rana. Se mantienen estaticos en la avenida.
 
 ## Mapa
+<img src="assets/images/mapa completo.png" alt="Imagen de Carro" width="100%" />
 
 ###
 El mapa está formado por una zona de arboles (principalmente como decoracion), pasto, la avenida de concreto, y nuestra meta. 
-
 
 ## Diagrama
 ![](/docs/Diagrama_Frogger.png)
