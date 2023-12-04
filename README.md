@@ -22,6 +22,7 @@ Los carros son el obstaculo principal para la rana. Se mantienen estaticos en la
 ## Mapa
 
 ###
+El mapa está formado por una zona de arboles (principalmente como decoracion), pasto, la avenida de concreto, y nuestra meta. 
 
 
 ## Diagrama
