@@ -8,14 +8,22 @@ José de Jesús Delgadillo Leal 22310205
 El objetivo del juego es guiar una rana hasta su hogar. Para hacerlo, la rana debe evitar coches mientras cruza una carretera congestionada.
 ## Caracteristicas
 ### Rana
-![](/assets/images/Frog/Up.bmp)
-##### 
+<img src="assets/images/Frog/Up.bmp" alt="Imagen de Rana" width="40%" />
+
+###
 Es el personaje principal del juego. Una rana que puede moverse en un plano 2D ya sea hacia arriba, abajo, izquierda o derecha
 
 ### Carros
-![](assets\images\tilesheet\carro.png)
-#####
-Los carros son el obstaculo principal para la rana. 
+<img src="assets/images/tilesheet/carro.png" alt="Imagen de Carro" width="40%" />
+
+####
+Los carros son el obstaculo principal para la rana. Se mantienen estaticos en la avenida.
+
+## Mapa
+
+###
+
 
 ## Diagrama
 ![](/docs/Diagrama_Frogger.png)
+
