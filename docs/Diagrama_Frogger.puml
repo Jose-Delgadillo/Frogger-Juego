@@ -6,9 +6,10 @@ class Frogdrick{
 +moverabajo()
 }
 class Jugador
-class Tronco
 class Carro
-class Camion 
+class Plataforma
+class Pasto
+class Calle
 class Puntos{
 +aumentar()
 }
@@ -21,11 +22,6 @@ class Obstaculo{
 +scrollizquierda()
 +scrollderecha()
 }
-class Plataforma{
-+scrollizquierda()
-+scrollderecha()
-}
-class Tortuga
 
 Frogdrick *-- Vida
 Jugador o-- Frogdrick
@@ -34,8 +30,7 @@ Jugador *-- Puntos
 Escenario *-- Plataforma
 Escenario *-- Obstaculo
 Obstaculo --|> Carro
-Obstaculo --|> Camion 
-Plataforma --|> Tortuga
-Plataforma --|> Tronco
+Plataforma --|> Pasto
+Plataforma --|> Calle
 Frogdrick o-- Escenario
 @enduml
