@@ -12,14 +12,9 @@ all: menu main mini
 
 menu: $(BIN_DIR)/menu
 
-main: $(BIN_DIR)/main
-
 mini: $(BIN_DIR)/mini
 
 $(BIN_DIR)/menu: src/menu.cpp
-	g++ $< $(SDL) -o $@
-
-$(BIN_DIR)/main: src/main.cpp
 	g++ $< $(SDL) -o $@
 
 $(BIN_DIR)/mini: src/mini.cpp
