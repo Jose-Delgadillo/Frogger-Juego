@@ -1,39 +1,29 @@
-INCLUDE_PATH = -IC:\msys64\mingw64\include\SDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+INCLUDE_PATH = -IC:\msys64\mingw64\include\SDL2
 LIB_PATH = -LC:\msys64\mingw64\lib
-LIBS = -lmingw32 -lSDL2main -lSDL2
+LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 FLAGS = -w -Wl,-subsystem,windows
 
 SDL = $(INCLUDE_PATH) $(LIB_PATH) $(FLAGS) $(LIBS)
+BIN_DIR = bin
 
-all: menu direccion bfg manager
+.PHONY: all clean
 
-menu: src/menu_img.cpp
-	g++ $< $(SDL) -o bin/$@
+all: menu main mini
 
-m: menu
-	./bin/menu
+menu: $(BIN_DIR)/menu
 
-direccion: src/direccion.cpp
-	g++ $< $(SDL) -o bin/$@
+main: $(BIN_DIR)/main
 
-d: direccion
-	./bin/direccion
+mini: $(BIN_DIR)/mini
 
-bfg: src/bfg.cpp
-	g++ $< $(SDL) -o bin/$@
+$(BIN_DIR)/menu: src/menu.cpp
+	g++ $< $(SDL) -o $@
 
-b: bfg
-	./bin/bfg
+$(BIN_DIR)/main: src/main.cpp
+	g++ $< $(SDL) -o $@
 
-mapa: src/mapa.cpp
-	g++ $< $(SDL) -o bin/$@
+$(BIN_DIR)/mini: src/mini.cpp
+	g++ $< $(SDL) -o $@
 
-map: mapa
-	./bin/mapa
-
-
-main: src/main.cpp
-	g++ $< $(SDL) -o bin/$@
-
-mai: main
-	./bin/main
+clean:
+	rm -f $(BIN_DIR)/*

@@ -17,6 +17,10 @@ enum KeyPressSurfaces
     KEY_PRESS_SURFACE_DOWN,
     KEY_PRESS_SURFACE_LEFT,
     KEY_PRESS_SURFACE_RIGHT,
+    KEY_PRESS_SURFACE_SHOOT_UP,
+    KEY_PRESS_SURFACE_SHOOT_DOWN,
+    KEY_PRESS_SURFACE_SHOOT_LEFT,
+    KEY_PRESS_SURFACE_SHOOT_RIGHT,
     KEY_PRESS_SURFACE_TOTAL
 };
 
@@ -52,6 +56,7 @@ SDL_Surface* gScreenSurface = NULL;
 
 int main(int argc, char* args[])
 {
+    Menu mainMenu; 
     if (!init())
     {
         printf("Failed to initialize!\n");
@@ -96,6 +101,13 @@ int main(int argc, char* args[])
 
             while (!quit)
             {
+                mainMenu.handleEvents(e);
+
+            if (mainMenu.shouldQuit())
+            {
+                quit = true;
+            }
+
                 Uint32 currentTime = SDL_GetTicks();
                 Uint32 deltaTime = currentTime - lastUpdateTime;
 
@@ -258,7 +270,7 @@ bool init()
     }
     else
     {
-        gWindow = SDL_CreateWindow("DOOM PITERO", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        gWindow = SDL_CreateWindow("Frogger", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (gWindow == NULL)
         {
             printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -277,13 +289,13 @@ bool loadMedia(Player& player)
     bool success = true;
 
     // Imágenes de movimiento hacia arriba
-    player.surfaces[KEY_PRESS_SURFACE_UP][0] = loadSurface("assets/images/Slayer/Slayer/Arma/BFG/SlayerUP.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_UP][0] = loadSurface("assets/images/Frog/Up.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_UP][0] == NULL)
     {
         printf("Failed to load up image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_UP][1] = loadSurface("assets/images/Armas/BFG/BalaUp.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_UP][1] = loadSurface("assets/images/Frog/Up.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_UP][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -291,13 +303,13 @@ bool loadMedia(Player& player)
     }
 
     // Imágenes de movimiento hacia abajo
-    player.surfaces[KEY_PRESS_SURFACE_DOWN][0] = loadSurface("assets/images/Slayer/Slayer/Arma/BFG/SlayerDown.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_DOWN][0] = loadSurface("assets/images/Frog/Down.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_DOWN][0] == NULL)
     {
         printf("Failed to load down image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_DOWN][1] = loadSurface("assets/images/Armas/BFG/BalaDown.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_DOWN][1] = loadSurface("assets/images/Frog/Down.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_DOWN][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -305,13 +317,13 @@ bool loadMedia(Player& player)
     }
 
     // Imágenes de movimiento hacia la izquierda
-    player.surfaces[KEY_PRESS_SURFACE_LEFT][0] = loadSurface("assets/images/Slayer/Slayer/Arma/BFG/SlayerLeft.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_LEFT][0] = loadSurface("assets/images/Frog/Left.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_LEFT][0] == NULL)
     {
         printf("Failed to load left image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_LEFT][1] = loadSurface("assets/images/Armas/BFG/BalaLeft.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_LEFT][1] = loadSurface("assets/images/Frog/Left.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_LEFT][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -319,13 +331,13 @@ bool loadMedia(Player& player)
     }
 
     // Imágenes de movimiento hacia la derecha
-    player.surfaces[KEY_PRESS_SURFACE_RIGHT][0] = loadSurface("assets/images/Slayer/Slayer/Arma/BFG/SlayerRight.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_RIGHT][0] = loadSurface("assets/images/Frog/Right.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_RIGHT][0] == NULL)
     {
         printf("Failed to load right image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] = loadSurface("assets/images/Armas/BFG/BalaRight.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] = loadSurface("assets/images/Frog/Right.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -381,20 +393,26 @@ void renderMap(int map[])
         {
         case 1:
             // Renderizar tile 1 (puedes cargar la imagen correspondiente)
-            tile1 = loadSurface("assets/images/Tiles/1.png");
+            tile1 = loadSurface("assets/images/tilesheet/pasto.png");
             SDL_BlitSurface(tile1, NULL, gScreenSurface, &tileRect);
             break;
 
         case 2:
             // Renderizar tile 2 (puedes cargar la imagen correspondiente)
-            tile2 = loadSurface("assets/images/Tiles/2.png");
+            tile2 = loadSurface("assets/images/tilesheet/carretera.png");
             SDL_BlitSurface(tile2, NULL, gScreenSurface, &tileRect);
             break;
 
         case 3:
             // Renderizar tile 3 (puedes cargar la imagen correspondiente)
-            tile3 = loadSurface("assets/images/Tiles/3.png");
+            tile3 = loadSurface("assets/images/tilesheet/carro.png");
             SDL_BlitSurface(tile3, NULL, gScreenSurface, &tileRect);
+            break;
+
+        case 6:
+            // Renderizar tile 6 (puedes cargar la imagen correspondiente)
+            tile6 = loadSurface("assets/images/tilesheet/meta.png");
+            SDL_BlitSurface(tile6, NULL, gScreenSurface, &tileRect);
             break;
 
         // Agrega más casos según los tipos de tiles que tengas
