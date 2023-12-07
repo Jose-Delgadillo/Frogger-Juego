@@ -1,4 +1,0 @@
-menu: $(BIN_DIR)/menu
-
-$(BIN_DIR)/menu: src/menu.cpp
-	g++ $< $(SDL) -o $@

@@ -10,18 +10,9 @@ class Carro
 class Plataforma
 class Pasto
 class Calle
-class Puntos{
-+aumentar()
-}
-class Tiempo{
-+disminuir()
-}
-class Vida
 class Escenario
-class Obstaculo{
-+scrollizquierda()
-+scrollderecha()
-}
+class Obstaculo
+
 
 Frogdrick *-- Vida
 Jugador o-- Frogdrick
