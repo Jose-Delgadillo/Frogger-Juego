@@ -6,7 +6,7 @@ FLAGS = -w -Wl,-subsystem,windows
 SDL = $(INCLUDE_PATH) $(LIB_PATH) $(FLAGS) $(LIBS)
 BIN_DIR = bin
 
-.PHONY: all clean
+.PHONY: all clean run
 
 all: mini
 
@@ -15,5 +15,9 @@ mini: $(BIN_DIR)/mini
 $(BIN_DIR)/mini: src/mini.cpp
 	g++ $< $(SDL) -o $@
 
+run: $(BIN_DIR)/mini
+	$(BIN_DIR)/mini
+
 clean:
 	rm -f $(BIN_DIR)/*
+
