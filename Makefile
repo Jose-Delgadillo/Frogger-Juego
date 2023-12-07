@@ -20,4 +20,3 @@ run: $(BIN_DIR)/mini
 
 clean:
 	rm -f $(BIN_DIR)/*
-
