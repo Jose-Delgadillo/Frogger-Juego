@@ -1,5 +1,6 @@
 # Frogger-Juego
 Josue Alejandro Gómez Soltero 22310230
+###
 José de Jesús Delgadillo Leal 22310205
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Frogger-logo.svg/2560px-Frogger-logo.svg.png)
@@ -28,3 +29,5 @@ El mapa está formado por una zona de arboles (principalmente como decoracion), 
 ## Diagrama
 ![](/docs/Diagrama_Frogger.png)
 
+### Creditos
+Se utilizo como motor el programa https://github.com/JaydenHammond/Proyecto/
