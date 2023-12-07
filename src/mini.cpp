@@ -6,9 +6,9 @@
 #include <string>
 #include <SDL_image.h>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 640;
-const int TILE_SIZE = 64;
+const int SCREEN_WIDTH = 320;
+const int SCREEN_HEIGHT = 224;
+const int TILE_SIZE = 32;
 const int BULLET_SPEED = 8;
 
 enum KeyPressSurfaces
@@ -41,9 +41,11 @@ struct Bullet
 };
 
 // Declarar las texturas globales
+SDL_Surface* tile0 = nullptr;
 SDL_Surface* tile1 = nullptr;
 SDL_Surface* tile2 = nullptr;
 SDL_Surface* tile3 = nullptr;
+SDL_Surface* tile4 = nullptr;
 
 bool init();
 bool loadMedia(Player& player);
@@ -56,7 +58,6 @@ SDL_Surface* gScreenSurface = NULL;
 
 int main(int argc, char* args[])
 {
-    Menu mainMenu; 
     if (!init())
     {
         printf("Failed to initialize!\n");
@@ -101,13 +102,6 @@ int main(int argc, char* args[])
 
             while (!quit)
             {
-                mainMenu.handleEvents(e);
-
-            if (mainMenu.shouldQuit())
-            {
-                quit = true;
-            }
-
                 Uint32 currentTime = SDL_GetTicks();
                 Uint32 deltaTime = currentTime - lastUpdateTime;
 
@@ -391,6 +385,13 @@ void renderMap(int map[])
 
         switch (map[i])
         {
+        
+        case 0:
+            // Renderizar tile 0 (puedes cargar la imagen correspondiente)
+            tile0 = loadSurface("assets/images/tilesheet/pino.png");
+            SDL_BlitSurface(tile0, NULL, gScreenSurface, &tileRect);
+            break;
+
         case 1:
             // Renderizar tile 1 (puedes cargar la imagen correspondiente)
             tile1 = loadSurface("assets/images/tilesheet/pasto.png");
@@ -409,18 +410,17 @@ void renderMap(int map[])
             SDL_BlitSurface(tile3, NULL, gScreenSurface, &tileRect);
             break;
 
-        case 6:
-            // Renderizar tile 6 (puedes cargar la imagen correspondiente)
-            tile6 = loadSurface("assets/images/tilesheet/meta.png");
-            SDL_BlitSurface(tile6, NULL, gScreenSurface, &tileRect);
+        case 4:
+            // Renderizar tile 4 (puedes cargar la imagen correspondiente)
+            tile4 = loadSurface("assets/images/tilesheet/meta.png");
+            SDL_BlitSurface(tile4, NULL, gScreenSurface, &tileRect);
             break;
 
-        // Agrega más casos según los tipos de tiles que tengas
-        // ...
+
 
         default:
             // Renderizar tile por defecto (puedes cargar la imagen correspondiente)
-            SDL_BlitSurface(tile3, NULL, gScreenSurface, &tileRect);
+            SDL_BlitSurface(tile1, NULL, gScreenSurface, &tileRect);
             break;
         }
     }
