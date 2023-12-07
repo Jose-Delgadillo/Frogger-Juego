@@ -9,7 +9,7 @@
 const int SCREEN_WIDTH = 320;
 const int SCREEN_HEIGHT = 224;
 const int TILE_SIZE = 32;
-const int BULLET_SPEED = 8;
+const int BULLET_SPEED = 7;
 
 enum KeyPressSurfaces
 {
@@ -80,7 +80,7 @@ int main(int argc, char* args[])
             SDL_Event e;
 
             Uint32 shootAnimationStartTime = 0;
-            const Uint32 SHOOT_ANIMATION_DURATION = 500;
+            const Uint32 SHOOT_ANIMATION_DURATION = 1;
 
             Uint32 lastUpdateTime = SDL_GetTicks();
 
@@ -100,8 +100,10 @@ int main(int argc, char* args[])
     3, 3, 1, 3, 3, 3, 3, 3, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
-            while (!quit)
-            {
+int prevPlayerX = player.centerX;
+int prevPlayerY = player.centerY;
+
+            while (!quit) {
                 Uint32 currentTime = SDL_GetTicks();
                 Uint32 deltaTime = currentTime - lastUpdateTime;
 
@@ -159,8 +161,63 @@ int main(int argc, char* args[])
                         }
                     }
                 }
+const int MOVEMENT_SPEED = 2;
 
-                const int MOVEMENT_SPEED = 5;
+                SDL_Rect playerRect = {player.centerX, player.centerY, TILE_SIZE, TILE_SIZE};
+    for (int i = 0; i < 100; ++i) {
+        if (mapa[i] == 3) { // Si el tile es un carro
+            int tileX = (i % 10) * TILE_SIZE;
+            int tileY = (i / 10) * TILE_SIZE;
+            SDL_Rect tileRect = {tileX, tileY, TILE_SIZE, TILE_SIZE};
+
+            // Comprobar colisión
+            if (SDL_HasIntersection(&playerRect, &tileRect)) {
+                // ¡Colisión con un carro!
+                // Restaurar la posición anterior del jugador
+                player.centerX = prevPlayerX;
+                player.centerY = prevPlayerY;
+
+                // Detener el movimiento en esa dirección
+                switch (player.currentDirection) {
+                    case KEY_PRESS_SURFACE_UP:
+                        player.centerY += MOVEMENT_SPEED; // Volver hacia abajo
+                        break;
+                    case KEY_PRESS_SURFACE_DOWN:
+                        player.centerY -= MOVEMENT_SPEED; // Volver hacia arriba
+                        break;
+                    case KEY_PRESS_SURFACE_LEFT:
+                        player.centerX += MOVEMENT_SPEED; // Volver hacia la derecha
+                        break;
+                    case KEY_PRESS_SURFACE_RIGHT:
+                        player.centerX -= MOVEMENT_SPEED; // Volver hacia la izquierda
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    // Actualizar la posición anterior del jugador
+    prevPlayerX = player.centerX;
+    prevPlayerY = player.centerY;
+                
+                // Verificar colisión con la meta (tile 4)
+for (int i = 0; i < 100; ++i) {
+    if (mapa[i] == 4) { // Si el tile es la meta
+        int tileX = (i % 10) * TILE_SIZE;
+        int tileY = (i / 10) * TILE_SIZE;
+        SDL_Rect tileRect = {tileX, tileY, TILE_SIZE, TILE_SIZE};
+
+        // Comprobar colisión con la meta
+        if (SDL_HasIntersection(&playerRect, &tileRect)) {
+            // ¡Colisión con la meta!
+            // Regresar al inicio
+            player.centerX = SCREEN_WIDTH / 2;
+            player.centerY = SCREEN_HEIGHT / 2;
+        }
+    }
+}
 
                 switch (player.currentDirection)
                 {
