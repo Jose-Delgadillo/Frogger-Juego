@@ -289,7 +289,7 @@ bool loadMedia(Player& player)
         printf("Failed to load up image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_UP][1] = loadSurface("assets/images/Frog/Up.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_UP][1] = loadSurface("assets/images/DownSlayerBFG.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_UP][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -303,7 +303,7 @@ bool loadMedia(Player& player)
         printf("Failed to load down image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_DOWN][1] = loadSurface("assets/images/Frog/Down.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_DOWN][1] = loadSurface("assets/images/DownSlayerBFG.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_DOWN][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -317,7 +317,7 @@ bool loadMedia(Player& player)
         printf("Failed to load left image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_LEFT][1] = loadSurface("assets/images/Frog/Left.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_LEFT][1] = loadSurface("assets/images/DownSlayerBFG.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_LEFT][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
@@ -331,7 +331,7 @@ bool loadMedia(Player& player)
         printf("Failed to load right image!\n");
         success = false;
     }
-    player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] = loadSurface("assets/images/Frog/Right.bmp");
+    player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] = loadSurface("assets/images/DownSlayerBFG.bmp");
     if (player.surfaces[KEY_PRESS_SURFACE_RIGHT][1] == NULL)
     {
         printf("Failed to load shoot image!\n");
